@@ -1,28 +1,33 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+// =============================================
+// Laboratory Work #6
+// ProgramClientCode.java
+// Автор: Чорномор Олександр
+// =============================================
 
-public class PostgreSQLClient {
+import java.sql.*;
+
+public class ProgramClientCode {
     public static void main(String[] args) {
-        String url = "jdbc:postgresql://localhost:5455/blazhkodb";
+        String url = "jdbc:postgresql://localhost:5455/lab6db";
         String user = "postgres";
-        String password = "1234";
+        String password = "password";
 
-        try {
-            Connection conn = DriverManager.getConnection(url, user, password);
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users_table");
+        System.out.println("=== Програма-клієнт для Docker PostgreSQL ===");
 
-            while (rs.next()) {
-                System.out.println("User: " + rs.getString("user_name"));
-            }
+        try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            System.out.println("Успішне підключення до бази даних!");
 
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            // Тестування методу register_user
+            CallableStatement stmt = conn.prepareCall("{call register_user(?, ?, ?)}");
+            stmt.setString(1, "chorno_test");
+            stmt.setString(2, "Pass123!");
+            stmt.setString(3, "chorno@example.com");
+
+            String result = stmt.getString(1);  // або використовуйте executeQuery залежно від реалізації
+            System.out.println("Результат реєстрації: " + result);
+
+        } catch (SQLException e) {
+            System.err.println("Помилка підключення: " + e.getMessage());
         }
     }
 }
