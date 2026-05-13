@@ -8,7 +8,7 @@ docker pull openjdk
 ## Крок 2. Скомпілювати Java-програму
 ```bash
 docker run \
---name blazhko-java \
+--name chornomor-java \
 -w /app \
 -v ${PWD}:/app \
 --rm \
@@ -18,7 +18,7 @@ openjdk javac ProgramClientCode.java
 ## Крок 3. Запустити Java-програму
 ```bash
 docker run \
---name blazhko-java \
+--name chornomor-java \
 -w /app \
 -v ${PWD}:/app \
 --rm \
