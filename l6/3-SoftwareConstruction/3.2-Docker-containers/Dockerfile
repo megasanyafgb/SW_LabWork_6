@@ -1,14 +1,17 @@
-# Dockerfile for custom PostgreSQL image
-FROM postgres
+# Dockerfile для Java + PostgreSQL клієнта
+# Laboratory Work #6
 
-LABEL maintainer="Your Name <your.email@example.com>"
-LABEL description="Custom PostgreSQL image with initialization script"
+FROM openjdk:17-jdk-slim
+
+LABEL author="[Чорномор Олександр]"
+LABEL description="Java client for Lab 6 - Software Construction"
 LABEL version="1.0"
 
-ENV POSTGRES_DB=blazhkodb
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=1234
+WORKDIR /app
 
-COPY db_scripts.sql /docker-entrypoint-initdb.d/
+COPY ProgramClientCode.java .
+COPY . .
 
-EXPOSE 5432
+RUN javac ProgramClientCode.java
+
+CMD ["java", "PostgreSQLClient"]
