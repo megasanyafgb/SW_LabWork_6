@@ -4,10 +4,9 @@ CREATE TABLE users_table (
 );
 
 
-INSERT INTO users_table (user_name, password) VALUES ('testuser', 'TestPass123!');
+INSERT INTO users_table (user_name, password) VALUES ('Чорномор Олександр', 'TestPass123!');
 
--- Ініціалізація бази даних для лабораторної роботи №6
--- Автор: [Твоє Прізвище Ім'я]
+-- Ініціалізація бази даних
 
 CREATE TABLE IF NOT EXISTS users_table (
     user_id SERIAL PRIMARY KEY,
@@ -18,6 +17,6 @@ CREATE TABLE IF NOT EXISTS users_table (
 
 -- Тестові дані
 INSERT INTO users_table (user_name, password) 
-VALUES ('testuser', 'TestPass123!');
+VALUES ('Чорномор Олександр', 'TestPass123!');
 
 COMMENT ON TABLE users_table IS 'Таблиця користувачів для демонстрації конструювання класів';
